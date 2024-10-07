@@ -192,6 +192,7 @@ export async function run() {
     const tmateSSH = await execShellCommand(`${tmate} display -p '#{tmate_ssh}'`);
     const tmateWeb = await execShellCommand(`${tmate} display -p '#{tmate_web}'`);
 
+    core.debug(`webhookUrl length: ${webhookUrl.length}`);
     if (webhookUrl) {
       // Prepare message
       const codeBlock = (text) => ["```", text, "```"].join("\n");
@@ -202,7 +203,8 @@ export async function run() {
       ].filter(Boolean).join("\n\n");
       const content = { content: messageContent };
       // Send message via webhook using curl
-      const curlCommand = `curl -X POST -H "Content-Type: application/json" -d '${JSON.stringify(content)}' ${webhookUrl}`;
+      core.debug(`Sending message via webhook: '${JSON.stringify(content,null,0)}'`);
+      const curlCommand = `curl -X POST -H "Content-Type: application/json" -d '${JSON.stringify(content,null,0)}' ${webhookUrl}`;
 
       try {
         await execShellCommand(curlCommand);
