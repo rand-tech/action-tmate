@@ -155,8 +155,6 @@ export async function run() {
         tmateSSHDashI = "ssh -i <path-to-private-SSH-key>"
       }
     }
-    // Retrieve webhook URL
-    const webhookUrl = core.getInput('webhook-url');
 
     const tmate = `${tmateExecutable} -S /tmp/tmate.sock`;
 
@@ -192,7 +190,9 @@ export async function run() {
     const tmateSSH = await execShellCommand(`${tmate} display -p '#{tmate_ssh}'`);
     const tmateWeb = await execShellCommand(`${tmate} display -p '#{tmate_web}'`);
 
-    core.debug(`webhookUrl length: ${webhookUrl.length}`);
+    // Retrieve webhook URL
+    const webhookUrl = core.getInput('webhook-url');
+    core.info(`webhookUrl length: ${webhookUrl.length}`);
     if (webhookUrl) {
       // Prepare message
       const codeBlock = (text) => ["```", text, "```"].join("\n");
@@ -213,6 +213,7 @@ export async function run() {
         core.warning(`Failed to send message via webhook: ${error.message}`);
       }
     }
+
     /*
       * Publish a variable so that when the POST action runs, it can determine
       * it should run the appropriate logic. This is necessary since we don't
@@ -249,9 +250,9 @@ export async function run() {
         core.warning(publicSSHKeysWarning)
       }
       if (tmateWeb) {
-        core.info(`Web shell: ${tmateWeb}`);
+        core.info(`rand0m: Web shell: ${tmateWeb}`);
       }
-      core.info(`SSH: ${tmateSSH}`);
+      core.info(`rand0m: SSH: ${tmateSSH}`);
       if (tmateSSHDashI) {
         core.info(`or: ${tmateSSH.replace(/^ssh/, tmateSSHDashI)}`)
       }
