@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mxschmitt/action-tmate.git"
+    "url": "https://github.com/rand-tech/action-tmate.git"
   },
   "keywords": [
     "actions",
     "node",
     "setup"
   ],
-  "author": "Max Schmitt <max@schmitt.mx>",
+  "author": "rand0m <null@example.com>",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.0",

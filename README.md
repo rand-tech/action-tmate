@@ -1,6 +1,6 @@
 # Debug your [GitHub Actions](https://github.com/features/actions) by using [tmate](https://tmate.io)
 
-[![GitHub Actions](https://github.com/mxschmitt/action-tmate/workflows/Node.js%20CI/badge.svg)](https://github.com/mxschmitt/action-tmate/actions)
+[![GitHub Actions](https://github.com/rand-tech/action-tmate/workflows/Node.js%20CI/badge.svg)](https://github.com/rand-tech/action-tmate/actions)
 [![GitHub Marketplace](https://img.shields.io/badge/GitHub-Marketplace-green)](https://github.com/marketplace/actions/debugging-with-tmate)
 
 This GitHub Action offers you a direct way to interact with the host system on which the actual scripts (Actions) will run.
@@ -29,7 +29,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
 ```
 
 To get the connection string, just open the `Checks` tab in your Pull Request and scroll to the bottom. There you can connect either directly per SSH or via a web based terminal.
@@ -65,7 +65,7 @@ jobs:
     steps:
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+        uses: rand-tech/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 ```
 <!--
@@ -87,7 +87,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
       with:
         detached: true
 ```
@@ -107,7 +107,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
       with:
         sudo: false
 ```
@@ -125,7 +125,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
       timeout-minutes: 15
 ```
 
@@ -145,7 +145,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup tmate session
       if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
 ```
 <!--
 {% endraw %}
@@ -164,7 +164,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
       with:
         limit-access-to-actor: true
 ```
@@ -184,7 +184,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      uses: rand-tech/action-tmate@v3
       with:
         tmate-server-host: ssh.tmate.io
         tmate-server-port: 22
@@ -203,7 +203,7 @@ jobs:
   build:
     runs-on: [self-hosted, linux]
     steps:
-    - uses: mxschmitt/action-tmate@v3
+    - uses: rand-tech/action-tmate@v3
       with:
         install-dependencies: false
 ```
@@ -214,4 +214,4 @@ If you want to continue a workflow and you are inside a tmate session, just crea
 
 ## Connection string / URL is not visible
 
-The connection string will be written in the logs every 5 seconds. For more information checkout issue [#1](https://github.com/mxschmitt/action-tmate/issues/1).
+The connection string will be written in the logs every 5 seconds. For more information checkout issue [#1](https://github.com/rand-tech/action-tmate/issues/1).
