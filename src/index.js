@@ -196,15 +196,17 @@ export async function run() {
     if (webhookUrl) {
       // Prepare message
       const codeBlock = (text) => ["```", text, "```"].join("\n");
+      const lengthMinutes = 30;
       const messageContent = [
         "New session created!",
+        `-# :fire: <t:${Math.floor(Date.now() / 1000) + (lengthMinutes * 60)}:R> (${lengthMinutes}m)`,
         codeBlock(tmateSSH),
         tmateSSHDashI ? 'or: ' + codeBlock(`${tmateSSH.replace(/^ssh/, tmateSSHDashI)}`) : ""
-      ].filter(Boolean).join("\n\n");
+      ].filter(Boolean).join("\n");
       const content = { content: messageContent };
       // Send message via webhook using curl
-      core.debug(`Sending message via webhook: '${JSON.stringify(content,null,0)}'`);
-      const curlCommand = `curl -X POST -H "Content-Type: application/json" -d '${JSON.stringify(content,null,0)}' ${webhookUrl}`;
+      core.debug(`Sending message via webhook: '${JSON.stringify(content, null, 0)}'`);
+      const curlCommand = `curl -X POST -H "Content-Type: application/json" -d '${JSON.stringify(content, null, 0)}' ${webhookUrl}`;
 
       try {
         await execShellCommand(curlCommand);
